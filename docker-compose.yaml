@@ -6,8 +6,8 @@ services:
     container_name: orthanc
     restart: always
     ports:
-      - "8042:8042"   # Web UI & REST API
-      - "4242:4242"   # DICOM Port
+      - "8042:8042" # Web UI & REST API
+      - "4242:4242" # DICOM Port
     environment:
       # 🧑‍💻 Akses Web Admin
       ORTHANC__REGISTERED_USERS: |
