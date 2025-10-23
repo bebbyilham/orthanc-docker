@@ -2,36 +2,36 @@ version: "3.8"
 
 services:
   orthanc:
-    image: osimis/orthanc-plugins:latest
+    image: orthancteam/orthanc:latest
     container_name: orthanc
     restart: always
     ports:
       - "8042:8042" # Web UI
       - "4242:4242" # DICOM Port
     environment:
-      # Login Web UI
+      # 🔐 Login Web UI
       ORTHANC__REGISTERED_USERS: |
         {
           "admin": "admin123"
         }
 
-      # Konfigurasi dasar
+      # ⚙️ Konfigurasi dasar
       ORTHANC__NAME: "OrthancDocker"
       ORTHANC__DICOM_AET: "ORTHANC"
       ORTHANC__DICOM_PORT: 4242
       ORTHANC__REMOTE_ACCESS_ALLOWED: "true"
 
-      # Remote DICOM Router
+      # 🔄 Remote AE (misal DCMROUTER)
       ORTHANC__DICOM_MODALITIES: |
         {
           "DCMROUTER": ["172.18.1.2", 11112, "DCMROUTER"]
         }
 
-      # Aktifkan DICOMweb plugin
+      # 🌐 Aktifkan DICOMweb
       ORTHANC__DICOM_WEB__ENABLE: "true"
       ORTHANC__DICOM_WEB__ROOT: "/dicom-web/"
 
-      # Folder penyimpanan DICOM
+      # 📦 Direktori penyimpanan
       ORTHANC__STORAGE_DIRECTORY: "/var/lib/orthanc/db"
 
     volumes:
