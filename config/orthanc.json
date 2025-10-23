@@ -1,22 +1,5 @@
 {
-  "Name": "Orthanc Server",
-  "HttpServerEnabled": true,
-  "HttpPort": 8042,
-  "DicomServerEnabled": true,
-  "DicomPort": 4242,
-  "AuthenticationEnabled": true,
-  "RegisteredUsers": {
-    "orthanc": "orthanc"
-  },
-  "DicomAet": "ORTHANC",
-  "RemoteAccessAllowed": true,
-  "SslEnabled": false,
-  "DicomCheckCalledAet": false,
-  "HttpCompressionEnabled": true,
-  "StorageCompression": false,
-  "IndexMaxResults": 500,
   "DicomModalities": {
-    "DCMROUTER": ["DCMROUTER", "dicom-router", 11112]
-  },
-  "Plugins": ["/usr/share/orthanc/plugins/WebViewerPlugin.so"]
+    "DCMROUTER": ["DCMROUTER", "172.18.1.2", 11112]
+  }
 }
