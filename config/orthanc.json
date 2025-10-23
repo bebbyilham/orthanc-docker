@@ -11,12 +11,12 @@
   "DicomAet": "ORTHANC",
   "RemoteAccessAllowed": true,
   "SslEnabled": false,
+  "DicomCheckCalledAet": false,
   "HttpCompressionEnabled": true,
   "StorageCompression": false,
   "IndexMaxResults": 500,
-  "DicomCheckCalledAet": false,
   "DicomModalities": {
-    "ROUTER": ["ROUTER", "dicom-router", 11112]
+    "DCMROUTER": ["DCMROUTER", "dicom-router", 11112]
   },
   "Plugins": ["/usr/share/orthanc/plugins/WebViewerPlugin.so"]
 }
