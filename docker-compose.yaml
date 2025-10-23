@@ -6,33 +6,31 @@ services:
     container_name: orthanc
     restart: always
     ports:
-      - "8042:8042" # Web UI
-      - "4242:4242" # DICOM Port
+      - "8042:8042" # Web UI Orthanc
+      - "4242:4242" # DICOM listener port
     environment:
-      # 🔐 Login Web UI
-      ORTHANC__REGISTERED_USERS: |
-        {
-          "admin": "admin123"
-        }
-
-      # ⚙️ Konfigurasi dasar
-      ORTHANC__NAME: "OrthancDocker"
-      ORTHANC__DICOM_AET: "ORTHANC"
-      ORTHANC__DICOM_PORT: 4242
-      ORTHANC__REMOTE_ACCESS_ALLOWED: "true"
-
-      # 🔄 Remote AE (misal DCMROUTER)
-      ORTHANC__DICOM_MODALITIES: |
-        {
-          "DCMROUTER": ["172.18.1.2", 11112, "DCMROUTER"]
-        }
-
-      # 🌐 Aktifkan DICOMweb
-      ORTHANC__DICOM_WEB__ENABLE: "true"
-      ORTHANC__DICOM_WEB__ROOT: "/dicom-web/"
-
-      # 📦 Direktori penyimpanan
-      ORTHANC__STORAGE_DIRECTORY: "/var/lib/orthanc/db"
-
+      - TZ=Asia/Jakarta
     volumes:
-      - ./orthanc-db:/var/lib/orthanc/db
+      - orthanc-data:/var/lib/orthanc/db
+      - ./config/orthanc.json:/etc/orthanc/orthanc.json:ro
+    networks:
+      - dicom-net
+
+  dicom-router:
+    image: registry.dto.kemkes.go.id/pub/dicom-router:latest
+    container_name: dicom-router
+    restart: always
+    ports:
+      - "8080:8080" # Web UI router (opsional)
+      - "11112:11112" # DICOM listener
+    environment:
+      - TZ=Asia/Jakarta
+    networks:
+      - dicom-net
+
+networks:
+  dicom-net:
+    driver: bridge
+
+volumes:
+  orthanc-data:
