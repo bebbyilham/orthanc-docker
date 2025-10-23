@@ -16,18 +16,6 @@ services:
     networks:
       - dicom-net
 
-  dicom-router:
-    image: registry.dto.kemkes.go.id/pub/dicom-router:latest
-    container_name: dicom-router
-    restart: always
-    ports:
-      - "8080:8080" # Web UI router (opsional)
-      - "11112:11112" # DICOM listener
-    environment:
-      - TZ=Asia/Jakarta
-    networks:
-      - dicom-net
-
 networks:
   dicom-net:
     driver: bridge
