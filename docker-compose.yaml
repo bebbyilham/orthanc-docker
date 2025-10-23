@@ -14,10 +14,10 @@ services:
       - orthanc-data:/var/lib/orthanc/db
       - ./config/orthanc.json:/etc/orthanc/orthanc.json:ro
     networks:
-      - dicom-network # gunakan network router yang sudah ada
+      - docker-dicom-satusehat_dicom-network # gunakan network router yang sudah ada
 
 networks:
-  dicom-network:
+  docker-dicom-satusehat_dicom-network:
     external: true # hubungkan ke network yang sudah ada (punya dicom-router)
 
 volumes:
